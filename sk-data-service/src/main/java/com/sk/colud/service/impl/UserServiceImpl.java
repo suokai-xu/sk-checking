@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import com.sk.colud.entity.User;
 import com.sk.colud.mapper.UserMapper;
+import com.sk.colud.service.BaseServiceClient;
 import com.sk.colud.service.UserService;
 
 
@@ -38,6 +39,9 @@ public class UserServiceImpl implements UserService {
 	
 	 @Autowired
 	 private UserMapper userDao;
+	 
+	 @Autowired
+	 private BaseServiceClient baseServiceClient;
 	 
 	 @SuppressWarnings("rawtypes")
 	 @Autowired
@@ -145,5 +149,14 @@ public class UserServiceImpl implements UserService {
         operations.set(key, user , 30 , TimeUnit.MINUTES);
 		return user;
 	 }
+
+	@Override
+	public boolean addUserInfo(User userInfo) {
+		 if(1 == baseServiceClient.insert(userInfo)){
+	            return true;
+	        } else {
+	            return false;
+	        }
+	}
 
 }

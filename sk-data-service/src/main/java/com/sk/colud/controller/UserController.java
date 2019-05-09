@@ -10,8 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSONObject;
+import com.sk.colud.common.IConstants;
+import com.sk.colud.entity.JsonBean;
 import com.sk.colud.entity.User;
 import com.sk.colud.service.UserService;
 import com.sk.colud.utils.JsonResult;
@@ -38,6 +42,49 @@ public class UserController {
     public Object getUserList() {
         List<User> ps = userService.listUser();
         return ps;
+    }
+	
+	/**
+	 * 
+	 * @param user
+	 * @return
+	 */
+	@ApiOperation(value = "addUser", notes = "管理员接口新增用户")
+    @RequestMapping(method = RequestMethod.POST, value = "/adduser")
+    public String addUser(@RequestParam String user) {
+        JsonBean reData = new JsonBean();
+        User userInfo = (User) JSONObject.parseObject(user, User.class);
+        if (userService.addUserInfo(userInfo)) {
+            reData.setStatus(IConstants.RESULT_INT_SUCCESS);
+            reData.setMessage("新增成功");
+        } else {
+            reData.setStatus(IConstants.RESULT_INT_ERROR);
+            reData.setMessage("新增失败");
+        }
+        return JSONObject.toJSONString(reData);
+    }
+	
+	/**
+	 * 
+	 * @param user
+	 * @return
+	 */
+	@ApiOperation(value = "addUser1", notes = "管理员接口新增用户")
+    @RequestMapping(method = RequestMethod.GET, value = "/adduser1")
+    public String addUser1() {
+        JsonBean reData = new JsonBean();
+        User userInfo = new User();
+        userInfo.setName("root");
+        userInfo.setPassword("root.admin");
+        userInfo.setSalt("123456");
+        if (userService.addUserInfo(userInfo)) {
+            reData.setStatus(IConstants.RESULT_INT_SUCCESS);
+            reData.setMessage("新增成功");
+        } else {
+            reData.setStatus(IConstants.RESULT_INT_ERROR);
+            reData.setMessage("新增失败");
+        }
+        return JSONObject.toJSONString(reData);
     }
 	
 	/**

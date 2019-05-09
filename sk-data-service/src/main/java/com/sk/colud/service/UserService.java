@@ -12,6 +12,13 @@ import com.sk.colud.entity.User;
 
 
 public interface UserService {
+	
+	/**
+     * 新增用户信息
+     *
+     * @param userInfo
+     */
+    public boolean addUserInfo(User userInfo);
 
 	/**
 	 * 通ID查询

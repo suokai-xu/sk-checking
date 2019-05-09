@@ -29,7 +29,7 @@ public class DataApplicationTests {
 //	public void contextLoads() {
 //	}
 //	
-	@Test
+	/*@Test
 	public void get_redis() {
 		int id = 3;
 		 // 从缓存中获取用户信息
@@ -50,7 +50,7 @@ public class DataApplicationTests {
            
         }
 	}
-	
+	*/
 	public void del_redis() {
 		
 	}
