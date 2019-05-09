@@ -10,7 +10,6 @@ import java.util.List;
 
 import com.sk.colud.entity.User;
 
-
 public interface UserService {
 	
 	/**

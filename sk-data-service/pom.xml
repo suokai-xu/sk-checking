@@ -9,6 +9,7 @@
   <name>sk-data-service</name>
   <description>sk-data-service</description>
   
+  
   <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>

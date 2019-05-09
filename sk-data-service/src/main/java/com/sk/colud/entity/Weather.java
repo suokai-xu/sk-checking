@@ -5,7 +5,6 @@ package com.sk.colud.entity;
 * sk-data-service
 * 
 **/
-
 import java.io.Serializable;
 
 import javax.persistence.Column;

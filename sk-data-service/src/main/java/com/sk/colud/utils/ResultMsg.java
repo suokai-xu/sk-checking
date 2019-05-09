@@ -1,5 +1,10 @@
 package com.sk.colud.utils;
 
+/**
+ * 
+ * @author Administrator
+ *
+ */
 public class ResultMsg {  
     private int errcode;  
     private String errmsg;  

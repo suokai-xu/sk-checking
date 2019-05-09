@@ -1,5 +1,7 @@
 package com.sk.colud.jwt;
-
+/**
+ * 
+ */
 import org.springframework.boot.context.properties.ConfigurationProperties;  
 
 @ConfigurationProperties(prefix = "audience")  

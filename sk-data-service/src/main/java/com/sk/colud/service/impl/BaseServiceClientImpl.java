@@ -25,11 +25,7 @@ import java.util.Map;
 import javax.persistence.Column;
 import javax.persistence.Table;
 
-/**
- * @Auther: pf
- * @Date: 2018/2/1 19:58
- * @Description:
- */
+
 @Service(value = "baseServie")
 public class BaseServiceClientImpl implements BaseServiceClient {
     //分批保存阀值

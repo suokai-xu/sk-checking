@@ -1,5 +1,9 @@
 package com.sk.colud.jwt;
-
+/**
+ * 
+ * @author Administrator
+ *
+ */
 public class LoginPara {  
     private String clientId;  
     private String userName;  

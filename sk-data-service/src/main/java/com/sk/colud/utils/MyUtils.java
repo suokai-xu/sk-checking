@@ -1,7 +1,11 @@
 package com.sk.colud.utils;
 
 import java.security.MessageDigest;  
-
+/**
+ * 
+ * @author Administrator
+ *
+ */
 public class MyUtils {  
 	
     public static String getMD5(String inStr) {  

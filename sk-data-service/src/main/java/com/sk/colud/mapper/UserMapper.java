@@ -10,7 +10,6 @@ import org.apache.ibatis.annotations.Update;
 import com.sk.colud.entity.User;
 import com.sk.colud.utils.MyMapper;
 
-
 @Mapper
 public interface UserMapper extends MyMapper<User> {
 	

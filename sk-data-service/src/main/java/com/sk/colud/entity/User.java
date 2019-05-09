@@ -7,8 +7,6 @@ import javax.persistence.Table;
 
 import com.sk.colud.annotation.Id;
 
-
-
 /**
 * 2019年5月7日 下午3:42:56
 * @HXing xu

@@ -5,7 +5,6 @@ package com.sk.colud.utils;
 * sk-redis
 * 
 **/
-
 import java.io.Serializable;
 
 public class JsonResult implements Serializable{ 

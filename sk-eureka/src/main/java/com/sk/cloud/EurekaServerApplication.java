@@ -6,6 +6,7 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 import cn.hutool.core.util.NetUtil;
 
+
 /**
 * 2019年5月7日 下午3:34:34
 * @HXing xu

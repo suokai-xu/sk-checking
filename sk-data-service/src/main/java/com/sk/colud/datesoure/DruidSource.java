@@ -12,7 +12,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import com.alibaba.druid.pool.DruidDataSource;
 
 /**
- * Created by LF on 2017/4/18.
+ * Created by LF on 2019/4/18.
  */
 @ConfigurationProperties(prefix = "spring.druid")
 public class DruidSource {

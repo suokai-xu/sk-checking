@@ -21,8 +21,6 @@ import com.sk.colud.mapper.UserMapper;
 import com.sk.colud.service.BaseServiceClient;
 import com.sk.colud.service.UserService;
 
-
-
 /**
 * 2019年3月12日 上午11:18:07
 * @HXing xu

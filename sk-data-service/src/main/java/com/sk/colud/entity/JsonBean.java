@@ -5,11 +5,6 @@ import java.io.Serializable;
 
 import com.sk.colud.common.IConstants;
 
-/**
- * @Auther: pf
- * @Date: 2017/12/13 15:38
- * @Description:
- */
 public class JsonBean implements Serializable {
     private static final long serialVersionUID = 1L;
 

@@ -16,7 +16,6 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 * sk-redis
 * 
 **/
-
 public class RedisConfig {
 
 	@Bean

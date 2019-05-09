@@ -1,5 +1,9 @@
 package com.sk.colud.utils;
-
+/**
+ * 
+ * @author Administrator
+ *
+ */
 public enum ResultStatusCode {  
     OK(0, "OK"),  
     INVALID_CLIENTID(30003, "Invalid clientid"),  

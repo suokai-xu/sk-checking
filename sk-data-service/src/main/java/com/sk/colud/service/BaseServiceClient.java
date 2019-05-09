@@ -3,11 +3,7 @@ package com.sk.colud.service;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * @Auther: pf
- * @Date: 2018/2/1 19:50
- * @Description:
- */
+
 public interface BaseServiceClient {
     /**
      * 保存
