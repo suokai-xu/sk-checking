@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- 指定Spring配置文件的Schema信息 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd	http://www.springframework.org/schema/tx	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd	http://www.springframework.org/schema/aop 	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd	http://www.springframework.org/schema/context	http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-lazy-init="true">
+
+	<!-- 福建体彩数据的抓取 大乐透、排列三、排列五、七星彩 、双色球 、 七乐彩 、 3D 、 福彩6+1 、 15选5、36选7、31选7、22选5 begin -->
+	<bean id="runChartTimer" class="com.sk.colud.controller.job.RunChart"></bean>
+	<!-- 定时器配置 -->
+	<bean id="runChartDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="runChartTimer"></property><!-- 指定任务类 -->
+		<property name="targetMethod" value="runRunChart"></property><!--指定任务方法 -->
+	</bean>
+	<!-- 定义时间间隔触发器 -->
+	<bean id="runChartTigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="runChartDetail"></property>
+		<!-- 配置定时器时间间隔 -->
+		<property name="cronExpression">
+			<!-- 每天8,20,21,22时，每15分钟执行一次 晚间是即将开奖时间，早8时是整理数据，防止遗漏数据 -->
+			<!-- <value>0 0/15 8,20,21,22 * * ?</value> -->
+			<!-- 每分钟执行一次 -->
+			<value>0 * * * * ?</value>
+		</property>
+	</bean>
+	<!-- 福建体彩数据的抓取 end -->
+	
+	
+			
+
+
+	<!-- 总管理类如果将lazy-init='false'那么容器启动就会执行调度程序 -->
+	<bean id="startCrawl"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean"
+		lazy-init="false">
+		<property name="triggers">
+			<list>
+				<ref bean="runChartTigger" />
+				
+			</list>
+		</property>
+	</bean>
+</beans>
