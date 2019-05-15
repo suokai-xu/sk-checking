@@ -13,9 +13,12 @@ import java.net.URLConnection;
 import java.util.HashMap;
 
 import org.apache.commons.io.IOUtils;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+
+import cn.hutool.json.JSONArray;
+import cn.hutool.json.JSONObject;
+
+
+
 
 
 public class Weather {
@@ -58,29 +61,29 @@ public class Weather {
 		System.out.println(result);
 		
 	}
-	
-	public static Weather JSON2Object(String jsonStr) throws JSONException{  
-
+	@SuppressWarnings("unused")
+	public static Weather JSON2Object(String jsonStr) {  
 		JSONObject obj = new JSONObject(jsonStr);
         
         JSONObject cityInfo = obj.getJSONObject("cityInfo");
-        String time = obj.getString("time");
-        String date = obj.getString("date");
+       
+		String time = obj.getStr("time");
+        String date = obj.getStr("date");
         
-        String title = cityInfo.getString("cityId");
-        String start = cityInfo.getString("updateTime");
+        String title = cityInfo.getStr("cityId");
+        String start = cityInfo.getStr("updateTime");
         JSONObject data = obj.getJSONObject("data");
-        String shidu = data.getString("shidu");
-        String pm25 = data.getString("pm25");
-        String pm10 = data.getString("pm10");
-        String quality = data.getString("quality");
-        String wendu = data.getString("wendu");
-        String ganmao = data.getString("ganmao");
+        String shidu = data.getStr("shidu");
+        String pm25 = data.getStr("pm25");
+        String pm10 = data.getStr("pm10");
+        String quality = data.getStr("quality");
+        String wendu = data.getStr("wendu");
+        String ganmao = data.getStr("ganmao");
         
         
         
         JSONArray forecast = data.getJSONArray("forecast");
-        for(int i = 0; i < forecast.length(); i++ ) {
+        for(int i = 0; i < forecast.size(); i++ ) {
         	JSONObject jsonObject = forecast.getJSONObject(i);
         	String day = (String) jsonObject.get("date");
         	String sunrise = (String) jsonObject.get("sunrise");

@@ -1,6 +1,7 @@
 package com.sk.colud.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.sk.colud.entity.Weather;
@@ -15,8 +16,8 @@ import com.sk.colud.utils.MyMapper;
 @Mapper
 public interface WeatherMapper extends MyMapper<Weather> {
 
-	@Select("select * from m_weather where code=#{code} ")
-	Weather findId(String code);
+	@Select("select * from m_weather where code=#{code}  and date = #{date}")
+	Weather findId(@Param("code") String code,@Param("date") String date );
 	
 	
 	

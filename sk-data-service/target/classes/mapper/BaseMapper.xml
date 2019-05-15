@@ -26,7 +26,6 @@
         WHERE ${KEY_ID} = #{KEY_VALUE}
     </update>
 
-
     <delete id="delete" parameterType="java.util.HashMap">
         DELETE FROM ${TABLE_NAME} WHERE ${KEY_ID} = #{KEY_VALUE}
     </delete>

@@ -7,19 +7,21 @@ package com.sk.colud.entity;
 **/
 import java.io.Serializable;
 
-import com.sk.colud.annotation.Column;
+import javax.persistence.Column;
+import javax.persistence.Table;
+
+import com.google.inject.PrivateBinder;
 import com.sk.colud.annotation.Id;
-import com.sk.colud.annotation.Table;
 
-import net.sf.jsqlparser.expression.DateTimeLiteralExpression.DateTime;
 
-@Table(value="m_weather")
+@Table(name="m_weather")
 public class Weather implements Serializable {
 	
-	private static final long serialVersionUID = -309303369805482278L;
+	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
 	private String code;
+	private String name;
 	private String day;  // 当前日期
 	private String date;  // 当前日期
 	private String shidu;    //湿度
@@ -40,6 +42,7 @@ public class Weather implements Serializable {
 	private String ganmao;  //"各类人群可自由活动",//感冒提醒（指数）
 	private String notice;
 	private String upDateTime; //天气更新时间
+	
 	@Id(value = "id")
 	public Integer getId() {
 		return id;
@@ -47,140 +50,147 @@ public class Weather implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	@Column(value="code")
+	@Column(name="code")
 	public String getCode() {
 		return code;
 	}
 	public void setCode(String code) {
 		this.code = code;
 	}
-	@Column(value="day")
+	@Column(name="name")
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	@Column(name="day")
 	public String getDay() {
 		return day;
 	}
 	public void setDay(String day) {
 		this.day = day;
 	}
-	@Column(value = "date")
+	@Column(name = "date")
 	public String getDate() {
 		return date;
 	}
 	public void setDate(String date) {
 		this.date = date;
 	}
-	@Column(value = "shidu")
+	@Column(name = "shidu")
 	public String getShidu() {
 		return shidu;
 	}
 	public void setShidu(String shidu) {
 		this.shidu = shidu;
 	}
-	@Column(value = "wendu")
+	@Column(name = "wendu")
 	public String getWendu() {
 		return wendu;
 	}
 	public void setWendu(String wendu) {
 		this.wendu = wendu;
 	}
-	@Column(value = "sunrise")
+	@Column(name = "sunrise")
 	public String getSunrise() {
 		return sunrise;
 	}
 	public void setSunrise(String sunrise) {
 		this.sunrise = sunrise;
 	}
-	@Column(value = "high")
+	@Column(name = "high")
 	public String getHigh() {
 		return high;
 	}
 	public void setHigh(String high) {
 		this.high = high;
 	}
-	@Column(value = "low")
+	@Column(name = "low")
 	public String getLow() {
 		return low;
 	}
 	public void setLow(String low) {
 		this.low = low;
 	}
-	@Column(value = "pm25")
+	@Column(name = "pm25")
 	public String getPm25() {
 		return pm25;
 	}
 	public void setPm25(String pm25) {
 		this.pm25 = pm25;
 	}
-	@Column(value = "pm10")
+	@Column(name = "pm10")
 	public String getPm10() {
 		return pm10;
 	}
 	public void setPm10(String pm10) {
 		this.pm10 = pm10;
 	}
-	@Column(value = "quality")
+	@Column(name = "quality")
 	public String getQuality() {
 		return quality;
 	}
 	public void setQuality(String quality) {
 		this.quality = quality;
 	}
-	@Column(value = "sunset")
+	@Column(name = "sunset")
 	public String getSunset() {
 		return sunset;
 	}
 	public void setSunset(String sunset) {
 		this.sunset = sunset;
 	}
-	@Column(value = "aqi")
+	@Column(name = "aqi")
 	public String getAqi() {
 		return aqi;
 	}
 	public void setAqi(String aqi) {
 		this.aqi = aqi;
 	}
-	@Column(value = "ymd")
+	@Column(name = "ymd")
 	public String getYmd() {
 		return ymd;
 	}
 	public void setYmd(String ymd) {
 		this.ymd = ymd;
 	}
-	@Column(value = "week")
+	@Column(name = "week")
 	public String getWeek() {
 		return week;
 	}
 	public void setWeek(String week) {
 		this.week = week;
 	}
-	@Column(value = "fx")
+	@Column(name = "fx")
 	public String getFx() {
 		return fx;
 	}
 	public void setFx(String fx) {
 		this.fx = fx;
 	}
-	@Column(value = "fl")
+	@Column(name = "fl")
 	public String getFl() {
 		return fl;
 	}
 	public void setFl(String fl) {
 		this.fl = fl;
 	}
-	@Column(value = "type")
+	@Column(name = "type")
 	public String getType() {
 		return type;
 	}
 	public void setType(String type) {
 		this.type = type;
 	}
-	@Column(value = "ganmao")
+	@Column(name = "ganmao")
 	public String getGanmao() {
 		return ganmao;
 	}
 	public void setGanmao(String ganmao) {
 		this.ganmao = ganmao;
 	}
-	@Column(value = "notice")
+	@Column(name = "notice")
 	public String getNotice() {
 		return notice;
 	}
@@ -188,7 +198,7 @@ public class Weather implements Serializable {
 		this.notice = notice;
 	}
 	
-	@Column(value = "up_date_time")
+	@Column(name = "up_date_time")
 	public String getUpDateTime() {
 		return upDateTime;
 	}

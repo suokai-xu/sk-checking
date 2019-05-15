@@ -9,6 +9,7 @@
   <name>sk-eureka</name>
   <description>sk-eureka</description>
   
+  
    <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
