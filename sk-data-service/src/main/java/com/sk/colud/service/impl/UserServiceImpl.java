@@ -45,6 +45,7 @@ public class UserServiceImpl implements UserService {
 	 @Autowired
 	 private RedisTemplate redisTemplate;
 	 
+	 
 	 @SuppressWarnings("unused")
 	 @Autowired
 	 private StringRedisTemplate stringRedisTemplate;

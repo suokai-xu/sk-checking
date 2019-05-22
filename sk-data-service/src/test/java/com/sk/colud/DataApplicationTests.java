@@ -1,52 +1,39 @@
-package com.sk.colud;
-
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import com.sk.colud.entity.User;
-import com.sk.colud.mapper.UserMapper;
-
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class DataApplicationTests {
-	
-	 @Autowired
-	 private UserMapper userDao;
-	 @Autowired
-	 private RedisTemplate redisTemplate;
-	
-
-//	@Test
-//	public void contextLoads() {
-//	}
+//package com.sk.colud;
+//
+//import org.junit.Test;
+//import org.junit.runner.RunWith;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.boot.test.context.SpringBootTest;
+//import org.springframework.data.redis.core.RedisTemplate;
+//import org.springframework.test.context.ContextConfiguration;
+//import org.springframework.test.context.junit4.SpringRunner;
+//
+//import com.sk.colud.entity.User;
+//import com.sk.colud.mapper.UserMapper;
+//import com.sk.colud.thread.Pub;
+//
+//@RunWith(SpringRunner.class)
+//@ContextConfiguration(locations = "classpath:application.properties")
+//public class DataApplicationTests {
 //	
-	/*@Test
-	public void get_redis() {
-		int id = 3;
-		 // 从缓存中获取用户信息
-        String key = "user_"+id;
-        ValueOperations<Object, Object> operations = redisTemplate.opsForValue();
-        // 缓存存在
-        boolean hasKey = redisTemplate.hasKey(key);
-        if (hasKey) {
-        	User user = (User) operations.get(key);
-            System.out.println("UserServiceImpl.getUserById() : 从缓存中获取了用户 >> " + user.toString());
-        }else {
-        	 // 从 DB 中获取城市信息
-            User user = userDao.getUserById(id);;
-     
-            // 插入缓存
-            operations.set(key, user,20, TimeUnit.SECONDS);
-            
-           
-        }
-	}
-	*/
-	public void del_redis() {
-		
-	}
-
-}
+//	 @Autowired
+//	 private UserMapper userDao;
+//	 @Autowired
+//	 private RedisTemplate redisTemplate;
+//	
+////	 @Autowired
+////	    private Pub pub;
+//	    
+//	    @Test
+//	    public void test() throws InterruptedException{
+//	        User u  = new User();
+//	        u.setName("wzg");
+//	        u.setPassword("root.admin");
+//	        u.setSalt("1123");
+//	       // pub.sendMessage("dddchannel", "我发消息了");
+//	       // pub.sendMessage("cccchannel", u);
+//	        Thread.sleep(100);//jackson 反向序列化慢
+//
+//	    }
+//
+//}

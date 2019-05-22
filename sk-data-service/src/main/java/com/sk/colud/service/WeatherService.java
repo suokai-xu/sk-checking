@@ -1,5 +1,8 @@
 package com.sk.colud.service;
 
+import java.util.List;
+import java.util.Map;
+
 import com.sk.colud.entity.Weather;
 
 import cn.hutool.json.JSONObject;
@@ -26,6 +29,12 @@ public interface WeatherService {
 	 * @return
 	 */
     Weather getUserByCode(String code , String date);
+    
+    /**
+     * 获取全部机构
+     * @return
+     */
+    Map<String, String> getAll();
     
     /**
      * 获取缓存中数据

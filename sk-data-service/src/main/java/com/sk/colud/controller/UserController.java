@@ -2,10 +2,12 @@ package com.sk.colud.controller;
 
 import java.util.List;
 
+import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +32,10 @@ import io.swagger.annotations.ApiOperation;
 public class UserController {
 	@Autowired
 	private UserService userService;
+	
+	@Autowired	
+	private RedisTemplate redisTemplate;
+
 	
 	private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
@@ -68,15 +74,19 @@ public class UserController {
 	 * 
 	 * @param user
 	 * @return
+	 * @throws InterruptedException 
 	 */
 	@ApiOperation(value = "addUser1", notes = "管理员接口新增用户")
     @RequestMapping(method = RequestMethod.GET, value = "/adduser1")
-    public String addUser1() {
+    public String addUser1() throws InterruptedException {
         JsonBean reData = new JsonBean();
         User userInfo = new User();
-        userInfo.setName("root");
-        userInfo.setPassword("root.admin");
+        userInfo.setName("chat1");
+        userInfo.setPassword("root.chat1");
         userInfo.setSalt("123456");
+		String channel = "chat1";
+		String msg = "hello";
+		
         if (userService.addUserInfo(userInfo)) {
             reData.setStatus(IConstants.RESULT_INT_SUCCESS);
             reData.setMessage("新增成功");
@@ -84,6 +94,8 @@ public class UserController {
             reData.setStatus(IConstants.RESULT_INT_ERROR);
             reData.setMessage("新增失败");
         }
+        redisTemplate.convertAndSend(channel, reData);
+
         return JSONObject.toJSONString(reData);
     }
 	

@@ -1,5 +1,7 @@
 package com.sk.colud.service.impl;
 
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
@@ -10,12 +12,17 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
+import com.sk.colud.entity.CityCode;
 import com.sk.colud.entity.Weather;
 import com.sk.colud.mapper.WeatherMapper;
 import com.sk.colud.service.BaseServiceClient;
 import com.sk.colud.service.WeatherService;
+import com.sk.colud.utils.PoolConfigUtil;
+import com.sun.tools.jdeps.resources.jdeps;
 
 import cn.hutool.json.JSONObject;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 /**
 * 2019年5月9日 下午3:17:29
@@ -37,6 +44,9 @@ public class WeatherServiceImpl  implements WeatherService{
 	 @Autowired
 	 private RedisTemplate redisTemplate;
 	 
+	 @Autowired
+	 private PoolConfigUtil poolConfig;
+	 
 	 @SuppressWarnings("unused")
 	 @Autowired
 	 private StringRedisTemplate stringRedisTemplate;
@@ -44,7 +54,7 @@ public class WeatherServiceImpl  implements WeatherService{
 	@Override
 	public boolean addWeather(Weather weatherInfo) {
 		 if(1 == baseServiceClient.insert(weatherInfo)){
-			 	String key = "weatherInfo"+weatherInfo.getCode()+weatherInfo.getDate();
+			 	String key = "weather"+weatherInfo.getCode()+weatherInfo.getDate();
 		        ValueOperations<Object, Object> operations = redisTemplate.opsForValue();
 				operations.set(key, weatherInfo , 1 , TimeUnit.DAYS);
 	            return true;
@@ -55,7 +65,7 @@ public class WeatherServiceImpl  implements WeatherService{
 
 	@Override
 	public Weather getUserByCode(String code , String date) {
-		String key = "weatherInfo"+code+date;
+		String key = "weather"+code+date;
 		ValueOperations<Object, Object> operations = redisTemplate.opsForValue();
         // 缓存存在
         boolean hasKey = redisTemplate.hasKey(key);
@@ -83,10 +93,52 @@ public class WeatherServiceImpl  implements WeatherService{
             log.info("WeatherServiceImpl.getUserByCode() : 从缓存中获取了天气数据 >> " + str.toString());
            
 		}else {
+			
+//			operations.set(key, weather, 1 , TimeUnit.DAYS);
             log.info("WeatherServiceImpl.getUserByCode() : 从缓存中没有数据 >> ");
 
 		}
 		 return str;
+	}
+
+	/**
+	 * 获取所有code
+	 */
+	@Override
+	public Map<String, String> getAll() {
+		String key = "weather_code";
+		JedisPool jedisPool= poolConfig.getSetKey();
+		Jedis jedis = null; // 类似于 new 一个 Jedis 对象
+		Map<String, String> map = null;
+		try{
+		    jedis = jedisPool.getResource(); // 从连接池获取 Jedis 对象
+		  
+		   boolean bool = jedis.exists(key);
+		   
+			if(bool) { 
+				map = jedis.hgetAll(key);
+	            log.info("WeatherServiceImpl.getAll() : 从缓存中获取code信息 >> " + map.toString());
+	           
+			}else {
+				
+				List<CityCode> list = weatherDao.getAll();
+				
+				for(CityCode c :list ) {
+					jedis.hset(key, c.getName(), c.getCode());
+					map.put(c.getName(), c.getCode());
+				}
+	            log.info("WeatherServiceImpl.getAll() : 从缓存中没有数据 >> ");
+
+			}
+
+		}catch(Exception e){
+		    e.printStackTrace();
+		}finally{
+		    if(jedis!=null){
+		    jedis.close();// 注意不是关闭，而是归还到连接池
+		    }
+		}
+		return map;
 	}
 
 }

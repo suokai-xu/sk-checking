@@ -8,6 +8,9 @@ import java.net.URLConnection;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.IOUtils;
@@ -68,8 +71,18 @@ public class RunChart extends QuartzJobBean {
 			//参数url化
 			String city = "101010100";
 			String date = format1.format(new Date());
+			Map<String, String> map = weatherService.getAll();
+			
+			Iterator<String> iterator = map.keySet().iterator();
+			while (iterator.hasNext()) {
+			    String key = iterator.next();
+			    System.out.println(key + "　：" + map.get(key));
+			    city = map.get(key);
+			    
+			}
 			
 			
+
 			String key = "weatherInfo"+city+date;
 			boolean hasKey = redisTemplate.hasKey(key);
 			if(hasKey) {
