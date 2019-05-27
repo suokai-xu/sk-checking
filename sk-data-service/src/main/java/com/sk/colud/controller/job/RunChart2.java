@@ -57,6 +57,7 @@ public class RunChart2 extends QuartzJobBean {
 	protected void executeInternal(JobExecutionContext arg0) throws JobExecutionException {
 		log.info("执行---RunChart.runRunChart()");
 		// 执行定时任务方法
+		
 		runProm();
 		
 	}
@@ -64,7 +65,8 @@ public class RunChart2 extends QuartzJobBean {
 	public void runProm(){
 		
 		ThreadChart T1 = new ThreadChart( "ThreadChart-1" , weatherService , redisTemplate);
-	     T1.start();
+		
+	    T1.start();
 	}
 
 }
@@ -104,7 +106,7 @@ class ThreadChart extends Thread {
 				    city = map.get(key);
 				    log.debug("Running ---------" +  city );
 				    runRunChart(city);
-					Thread.sleep(5);
+					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -126,12 +128,10 @@ class ThreadChart extends Thread {
 			
 			try {
 				
-				
-				String date = format1.format(new Date());
-				String key = "weatherInfo"+city+date;
+				String key = "weather_15_"+city;
 				boolean hasKey = redisTemplate.hasKey(key);
 				if(hasKey) {
-					log.info("今天的时间已缓存》》》》"+hasKey);
+					log.info("今天的天气已缓存》》》》"+hasKey);
 					return;
 				}else {
 					//拼地址 http://t.weather.sojson.com/api/weather/city/101030100
@@ -157,7 +157,7 @@ class ThreadChart extends Thread {
 			        */
 			        if ( weatherService.addWeather(weather)) {
 			        	//缓存中存放最近15天气信息  每天缓存一次
-			        	String key1 = "weatherInfo"+city;
+			        	String key1 = "weather_15_"+city;
 			        	boolean objbool =  redisTemplate.hasKey(key);
 			        			
 			        	if(objbool) {

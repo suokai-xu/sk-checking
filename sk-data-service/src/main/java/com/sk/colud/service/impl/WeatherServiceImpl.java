@@ -1,5 +1,6 @@
 package com.sk.colud.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -54,7 +55,7 @@ public class WeatherServiceImpl  implements WeatherService{
 	@Override
 	public boolean addWeather(Weather weatherInfo) {
 		 if(1 == baseServiceClient.insert(weatherInfo)){
-			 	String key = "weather"+weatherInfo.getCode()+weatherInfo.getDate();
+			 	String key = "weather"+weatherInfo.getCode()+weatherInfo.getDay();
 		        ValueOperations<Object, Object> operations = redisTemplate.opsForValue();
 				operations.set(key, weatherInfo , 1 , TimeUnit.DAYS);
 	            return true;
@@ -109,7 +110,7 @@ public class WeatherServiceImpl  implements WeatherService{
 		String key = "weather_code";
 		JedisPool jedisPool= poolConfig.getSetKey();
 		Jedis jedis = null; // 类似于 new 一个 Jedis 对象
-		Map<String, String> map = null;
+		Map<String, String> map = new HashMap<>();
 		try{
 		    jedis = jedisPool.getResource(); // 从连接池获取 Jedis 对象
 		  

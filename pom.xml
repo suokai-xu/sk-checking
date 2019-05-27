@@ -49,5 +49,6 @@
     <modules>
     	<module>sk-eureka</module>
     	<module>sk-data-service</module>
+    	<module>sk-view-service</module>
     </modules>
 </project>
