@@ -135,7 +135,8 @@ class ThreadChart extends Thread {
 					return;
 				}else {
 					//拼地址 http://t.weather.sojson.com/api/weather/city/101030100
-					String apiUrl = String.format(" http://t.weather.sojson.com/api/weather/city/"+city);
+//					http://t.weather.itboy.net/api/weather/city/101030100  域名修改
+					String apiUrl = String.format(" http://t.weather.itboy.net/api/weather/city/"+city);
 					//开始请求
 					URL url = new URL(apiUrl);
 			

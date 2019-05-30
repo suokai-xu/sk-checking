@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>products</title>
+    <title>users</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<style>
 
@@ -34,6 +34,11 @@
 				<td th:text="${p.password}"></td>
 			</tr>
 		</tbody>
+		 <tr>
+            <td align="center" colspan="3">
+                <p th:text="${version}" >suokai-xu sk-checking version unknown</p>
+            </td>
+        </tr>
 	</table>
 </div>
 
