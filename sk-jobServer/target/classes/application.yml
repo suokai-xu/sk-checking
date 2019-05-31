@@ -1,0 +1,12 @@
+#	server:
+#  port: 因为只启动一个 job-server, 所以端口号由用户自动设置，推荐 8000
+
+spring:
+  application:
+    name: job-server
+  zipkin:
+    base-url: http://localhost:9411        
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

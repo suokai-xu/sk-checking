@@ -5,12 +5,9 @@
     <artifactId>sk-checking</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>sk-data-service</artifactId>
-  <name>sk-data-service</name>
-  <description>sk-data-service</description>
+  <artifactId>sk-jobServer</artifactId>
   
-  
-  <dependencies>
+    <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
@@ -32,6 +29,10 @@
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-annotations</artifactId>
 		</dependency>
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+        </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
@@ -116,5 +117,4 @@
 		</dependency>
 		                
     </dependencies>
-    
 </project>

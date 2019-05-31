@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"    
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   
+	   xmlns:p="http://www.springframework.org/schema/p"  
+	   xmlns:context="http://www.springframework.org/schema/context"   
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+					http://www.springframework.org/schema/beans/spring-beans-4.3.xsd 
+					http://www.springframework.org/schema/context 
+					http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+					http://www.springframework.org/schema/aop 
+					http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+					http://www.springframework.org/schema/tx 
+					http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+ 
+	<!-- 配置Spring RedisTemplate -->
+	<bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" id="jdkSerializationRedisSerializer" />
+	<bean class="org.springframework.data.redis.serializer.StringRedisSerializer" id="stringRedisSerializer" />
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory" ref="jedisConnectionFactory"/>
+		<property name="defaultSerializer" ref="stringRedisSerializer"/>
+		<property name="keySerializer" ref="stringRedisSerializer"/>
+		<!-- <property name="valueSerializer" ref="jdkSerializationRedisSerializer"/> -->
+		<property name="valueSerializer" ref="stringRedisSerializer"/>
+	</bean>	
+	
+	<!-- 定义监听类 -->
+	<bean id="redisMessageListener" class="com.sk.colud.thread.RedisMessageListener">
+		<property name="redisTemplate" ref="redisTemplate"/>
+	</bean>
+	
+	<!-- 定义监听容器 -->
+	<bean id="redisMessageListenerContainer" class="org.springframework.data.redis.listener.RedisMessageListenerContainer" destroy-method="destroy">
+		<property name="connectionFactory" ref="jedisConnectionFactory"/>
+		<!-- 任务执行器 -->
+		<property name="taskExecutor">
+			<bean class="org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler">
+				<property name="poolSize" value="10"/>
+			</bean>
+		</property>
+		<!-- 消息监听器 -->
+		<property name="messageListeners">
+			<map>
+				<entry key-ref="redisMessageListener">
+					<list>
+						<!-- <bean class="org.springframework.data.redis.listener.ChannelTopic">
+							<constructor-arg value="chat1" />
+						</bean>
+						<bean class="org.springframework.data.redis.listener.ChannelTopic">
+							<constructor-arg value="chat2" />
+						</bean> -->
+						<bean class="org.springframework.data.redis.listener.PatternTopic">
+							<constructor-arg value="chat*" />
+						</bean>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+</beans>
