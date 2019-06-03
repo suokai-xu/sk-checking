@@ -18,6 +18,18 @@ public class User implements Serializable {
 	private String password;
 	private String salt;
 	
+	
+	public User() {
+		
+	}
+	public User(Integer id, String name, String password, String salt) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.password = password;
+		this.salt = salt;
+	}
+
 	public Integer getId() {
 		return id;
 	}

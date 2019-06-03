@@ -52,5 +52,6 @@
     	<module>sk-view-service</module>
     	<module>sk-configServer</module>
     	<module>sk-jobServer</module>
+    	<module>sk-zuul</module>
     </modules>
 </project>

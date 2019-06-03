@@ -13,7 +13,7 @@ import com.sk.colud.entity.User;
 * sk-view-service
 * data-service
 **/
-@FeignClient(value = "DATA-SERVICE")
+@FeignClient(value = "DATA-SERVICE" ,fallback = UserClientFeignHystrix.class)
 public interface UserClientFeign {
 	@GetMapping("/users")
     public List<User> listUsers();

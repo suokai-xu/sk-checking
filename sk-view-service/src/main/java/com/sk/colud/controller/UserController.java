@@ -29,7 +29,7 @@ public class UserController {
 	private UserService userService;
     
     @RequestMapping("/users")
-    public Object products(Model m) {
+    public Object userAll(Model m) {
         List<User> us = userService.listUsers();
         m.addAttribute("version", version); 
         m.addAttribute("us", us);

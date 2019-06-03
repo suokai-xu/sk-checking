@@ -35,7 +35,20 @@ import java.io.Serializable;
 	private String notice;
 	private String upDateTime; //天气更新时间
 	
- 	public Integer getId() {
+	
+	
+ 	public Weather() {
+	}
+ 	
+	public Weather(String name, String high, String low, String quality) {
+		super();
+		this.name = name;
+		this.high = high;
+		this.low = low;
+		this.quality = quality;
+	}
+
+	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
