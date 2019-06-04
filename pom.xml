@@ -53,5 +53,8 @@
     	<module>sk-configServer</module>
     	<module>sk-jobServer</module>
     	<module>sk-zuul</module>
+    	<module>hystrix-dashboard</module>
+    	<module>sk-hystrix-dashboard</module>
+    	<module>sk-ServiceTurbine</module>
     </modules>
 </project>
